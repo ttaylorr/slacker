@@ -2,7 +2,7 @@ module Slacker
   class Shipit < Plugin
 
     # Squirrels courtesy of Hubot
-    @squirrels = [
+    @@squirrels = [
       "https://img.skitch.com/20111026-r2wsngtu4jftwxmsytdke6arwd.png",
       "http://images.cheezburger.com/completestore/2011/11/2/aa83c0c4-2123-4bd3-8097-966c9461b30c.jpg",
       "http://images.cheezburger.com/completestore/2011/11/2/46e81db3-bead-4e2e-a157-8edd0339192f.jpg",
@@ -26,7 +26,7 @@ module Slacker
     end
 
     def respond (text, user_name, channel_name, timestamp)
-      @squirrels.sample
+      @@squirrels.sample
     end
 
     Bot.register(Shipit)
