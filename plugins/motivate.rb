@@ -33,9 +33,9 @@ module Slacker
 
     def respond (text, user_name, channel_name, timestamp)
       message = @@remarks_one.sample
-      if (text.include? 'me')
+      if (/\sme\s?/ =~ text)
         message.gsub! '%', user_name
-      elsif (text.include? 'us')
+      elsif (/\sus\s?/ =~ text)
         message = @@remarks_all.sample
       else
         address = pattern.match(text)
