@@ -12,7 +12,7 @@ module Slacker
       query = text[address.end(0)..text.length()]
 
       image = Google::Search::Image.new(:query => query).first
-      return image.uri
+      'Here\'s an image of the' << query << '\n' << image.uri
     end
 
     Bot.register(Images)
