@@ -39,7 +39,7 @@ module Slacker
         message = @@remarks_all.sample
       else
         address = pattern.match(text)
-        motivated = text[address.end(0)+1..motivated.length()]
+        motivated = text[address.end(0)..text.length()]
 
         message.gsub! '%', motivated
       end
