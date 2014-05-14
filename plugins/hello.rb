@@ -9,7 +9,7 @@ module Slacker
     ]
 
     def pattern
-      /(say\shi)|(introduce\syourself)/
+      /(say\s(hi|hello))|(introduce\syourself)/
     end
 
     def respond (text, user_name, channel_name, timestamp)
