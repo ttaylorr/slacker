@@ -11,8 +11,7 @@ post '/' do
   timestamp = params[:timestamp]
 
   response = Slacker::Bot.handle(text, user_name, channel_name, timestamp)
-  response = response.join("\n")
-  JSON.generate({text: response}) if response
+  JSON.generate({text: response.join("\n")}) if response
 end
 
 get '/' do
