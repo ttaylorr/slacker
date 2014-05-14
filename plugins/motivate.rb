@@ -28,18 +28,22 @@ module Slacker
     ]
 
     def pattern
-      /motivate\s(me|us)/
+      /motivate\s(me|us)?/
     end
 
     def respond (text, user_name, channel_name, timestamp)
+      message = @@remarks_one.sample
       if (text.include? 'me')
-        message = @@remarks_one.sample
         message.gsub! '%', user_name
-
-        return message
       elsif (text.include? 'us')
-        return @@remarks_all.sample
+        message = @@remarks_all.sample
+      else
+        address = pattern.match(text)
+        motivated = text[address.end(0)+1..motivated.length()]
+
+        message.gsub! '%', motivated
       end
+      return message
     end
 
     Bot.register(Motivate)
