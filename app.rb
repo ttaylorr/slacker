@@ -36,7 +36,8 @@ module Slacker
 
         @@plugins.each do |plugin|
           if plugin.pattern =~ text
-            response << plugin.respond(text, user_name, channel_name, timestamp)
+            r = plugin.respond(text, user_name, channel_name, timestamp)
+            response << r unless r.nil?
           end
         end
 
