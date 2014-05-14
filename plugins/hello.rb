@@ -4,7 +4,7 @@ module Slacker
     # Squirrels courtesy of Hubot
     @@greetings = [
       "Hello!",
-      "Pleased to meet you."
+      "Pleased to meet you.",
       "I'm Slacker!"
     ]
 

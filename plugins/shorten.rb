@@ -12,7 +12,7 @@ module Slacker
     ]
 
     def pattern
-      /shorten(\s?me)?\s?http/
+      /shorten\s?http/
     end
 
     def respond (text, user_name, channel_name, timestamp)
