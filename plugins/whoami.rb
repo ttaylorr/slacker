@@ -2,7 +2,7 @@ module Slacker
   class WhoAmI < Plugin
 
     def pattern
-      /who\s?am\s?i\s?/
+      /who\s?am\s?i\s?/i
     end
 
     def respond (text, user_name, channel_name, timestamp)
