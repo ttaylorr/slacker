@@ -15,8 +15,7 @@ post '/' do
 end
 
 get '/' do
-  content_type :json
-  JSON.generate({text: 'Hello from Slacker!'})
+  haml :index
 end
 
 module Slacker
