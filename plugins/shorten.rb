@@ -12,11 +12,11 @@ module Slacker
     ]
 
     def pattern
-      /shorten\s?http/
+      /shorten\s(http)/
     end
 
     def respond (text, user_name, channel_name, timestamp)
-      longUrl = text[text.index('http')..text.length()]
+      longUrl = text[text.index('http')..text.length()].tr('<>','')
       googl = Googl.shorten(longUrl)
 
       return @@responses.sample + ' ' + googl.short_url 
