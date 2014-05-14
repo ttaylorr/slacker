@@ -1,7 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    googl (0.6.3)
+      httparty (~> 0.10.0)
+      json (>= 1.4.6)
+    httparty (0.10.2)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     json (1.8.1)
+    multi_json (1.10.0)
+    multi_xml (0.5.5)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -15,5 +23,6 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  googl
   json
   sinatra
