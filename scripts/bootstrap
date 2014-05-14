@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "Starting 'slacker', written by: ttaylorr"
+ruby ./app.rb
