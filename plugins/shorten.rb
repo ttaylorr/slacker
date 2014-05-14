@@ -16,7 +16,7 @@ module Slacker
     end
 
     def respond (text, user_name, channel_name, timestamp)
-      return nil unless text.contains? 'http'
+      return nil unless text.include? 'http'
 
       longUrl = text[text.index('http')..text.length()].tr('<>','')
       googl = Googl.shorten(longUrl)
