@@ -1,4 +1,4 @@
-## slacker
+# slacker
 
 <img src="http://i.imgur.com/tMom4oB.png" alt="slacker_icon" width="160" height="160" align="right">
 Slacker is a collection of scripts for making [Slack](https://slack.com) a little better.
