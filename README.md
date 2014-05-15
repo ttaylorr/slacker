@@ -14,7 +14,13 @@ $ git clone https://github.com/ttaylorr/slacker && cd slacker
 
 2. Once cloned, install all the necessary gems by running `bundle install`.  This step assumes you already have Ruby installed and in your path.
 
-3. Once ready, start Slacker by either invoking `script/boostrap` or the following:
+3. Put your Google Translate API key into your environment variables.  Do so by invoking the following:
+
+```
+$ export SLACKER_TRANSLATE_API_KEY=<your-key>
+```
+
+4. Once ready, start Slacker by either invoking `script/boostrap` or the following:
 
 ```
 $ ruby app.rb -o 0.0.0.0
