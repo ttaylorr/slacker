@@ -77,8 +77,8 @@ module Slacker
     def respond (text, user_name, channel_name, timestamp)
       matches = pattern.match(text)
 
-      source = matches.captures[1]
-      target = matches.captures[2]
+      source = matches.captures[3]
+      target = matches.captures[4]
 
       if @@languages[source].nil?
         source = @@languages.key(source.downcase.capitalize)
@@ -94,7 +94,7 @@ module Slacker
         ToLang.start(ENV['SLACKER_TRANSLATE_API_KEY'])
 
         begin
-          to_translate = matches.captures[0]
+          to_translate = matches.captures[1]
           translated = to_translate.translate(target, :from => source)
 
           '\'' << to_translate << '\' means \'' << translated << '\' in ' << @@languages[target]
