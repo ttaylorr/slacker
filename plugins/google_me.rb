@@ -16,9 +16,9 @@ module Slacker
 
       results = Google::Search::Web.new(:query => query)
       if results.any?
-        'Here\'s something for #{query}: ' << results.first.uri
+        "Here's something for #{query}: " << results.first.uri
       else
-        'Aww :( I couldn\'t find aynthing matching \'#{query}\''
+        "Aww :( I couldn't find aynthing matching '#{query}'"
       end
     end
 
