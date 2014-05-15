@@ -35,10 +35,23 @@ module Slacker
         response = Array.new
 
         @@plugins.each do |plugin|
-          if plugin.pattern =~ text
+          if /slacker\s(help|man)/ =~ text
+            matches = /slacker\s(help|man)\s(.*)/.match(text)
+            break if matches.nil?
+
+            needs_help_with = matches.captures[1]
+
+            if plugin.pattern =~ needs_help_with
+              response << plugin.help unless plugin.help.nil?
+            end
+          elsif plugin.pattern =~ text
             r = plugin.respond(text, user_name, channel_name, timestamp)
             response << r unless r.nil?
           end
+        end
+
+        if /slacker\s(help|man)/ =~ text and not response.any?
+          response << 'No help available for that command :('
         end
 
         return response
@@ -52,6 +65,10 @@ module Slacker
     end
 
     def handle(text, user_name, channel_name, timestamp)
+      ''
+    end
+
+    def help
       ''
     end
   end

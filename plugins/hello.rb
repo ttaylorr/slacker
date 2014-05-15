@@ -1,5 +1,8 @@
 module Slacker
   class Hello < Plugin
+    def help
+      'Usage: slacker say hello -> a nice greeting'
+    end
 
     # Squirrels courtesy of Hubot
     @@greetings = [

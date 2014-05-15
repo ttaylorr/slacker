@@ -1,5 +1,9 @@
 module Slacker
   class Selfie < Plugin
+    def help
+      'Usage: slacker take a selfie -> slacker will show you how pretty he is.'
+    end
+
     def pattern
       /(take\sa\s)?selfie/
     end

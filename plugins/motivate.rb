@@ -27,6 +27,10 @@ module Slacker
       "I love this team's different way of looking at things!"
     ]
 
+    def help
+      'Usage: slacker motivate [me|us|<user-name>] -> something to pump him/her/them up!'
+    end
+
     def pattern
       /(motivate|encourage)\s(me|us)?/
     end

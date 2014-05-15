@@ -11,6 +11,10 @@ module Slacker
       'No problem!'
     ]
 
+    def help
+      'Usage: slacker shorten [url] -> a goo.gl shortened version of that url'
+    end
+
     def pattern
       /shorten/
     end

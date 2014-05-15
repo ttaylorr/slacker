@@ -1,6 +1,10 @@
 module Slacker
   class WhoAmI < Plugin
 
+    def help
+      'Who\'s your daddy?'
+    end
+
     def pattern
       /who\s?am\s?i\s?/i
     end

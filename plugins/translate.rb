@@ -69,6 +69,10 @@ module Slacker
       "yi" => "Yiddish"
     }
 
+    def help
+      'Usage: slacker translate [text-to-translate] from [source-lang] to [target-lang] -> translated version of your text!'
+    end
+
     def pattern
       choices = @@languages.flatten.join '|'
       /translate\s('|")(.+)('|")\sfrom\s(#{choices})\sto\s(#{choices})/i

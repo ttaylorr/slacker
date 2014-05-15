@@ -10,6 +10,10 @@ module Slacker
       'Have a great day!'
     ]
 
+    def help
+      'Usage: slacker, be nice -> slacker will begrudginly say something kind'
+    end
+
     def pattern
       /be\snice/
     end

@@ -1,5 +1,9 @@
 module Slacker
   class Ping < Plugin
+    def help
+      'Usage: slacker ping -> I am here!'
+    end
+
     def pattern
       /ping|(are\s(you|u|ya)\sthere)/i
     end

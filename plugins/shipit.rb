@@ -1,6 +1,5 @@
 module Slacker
   class Shipit < Plugin
-
     # Squirrels courtesy of Hubot
     @@squirrels = [
       "https://img.skitch.com/20111026-r2wsngtu4jftwxmsytdke6arwd.png",
@@ -20,6 +19,10 @@ module Slacker
       "https://dl.dropboxusercontent.com/u/602885/github/squirrelmobster.jpeg",
       "http://f.cl.ly/items/0S1M2d1h0I132S082A05/flying-squirrel.gif"
     ]
+
+    def help
+      'Usage: slacker ship it -> a squirrel'
+    end
 
     def pattern
       /ship(ping|z|\s?it|ped)/

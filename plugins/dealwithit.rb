@@ -1,5 +1,8 @@
 module Slacker
   class DealWithIt < Plugin
+    def help
+      'Usage: slacker deal with it -> some awesome sunglasses'
+    end
 
     @@deals = [
       "http://i.imgur.com/ykDuU.gif",

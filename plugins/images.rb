@@ -2,6 +2,9 @@ require 'google-search'
 
 module Slacker
   class Images < Plugin
+    def help
+      'Usage: slacker image me [query] -> the first image returned from Google Images'
+    end
 
     def pattern
       /image(\s?me)?/
