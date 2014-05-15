@@ -5,7 +5,7 @@ module Slacker
     end
 
     def respond (text, user_name, channel_name, timestamp)
-      'http://goo.gl/ck7GoN'
+      'Look, it\'s me! :camera: :sparkles: http://i.imgur.com/tMom4oB.png'
     end
 
     Bot.register(Selfie)
