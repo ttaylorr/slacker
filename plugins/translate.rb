@@ -71,7 +71,7 @@ module Slacker
 
     def pattern
       choices = @@languages.flatten.join '|'
-      /translate\s'(.+)'\sfrom\s(#{choices})\sto\s(#{choices})/i
+      /translate\s('|")(.+)('|")\sfrom\s(#{choices})\sto\s(#{choices})/i
     end
 
     def respond (text, user_name, channel_name, timestamp)
