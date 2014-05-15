@@ -28,7 +28,7 @@ module Slacker
     ]
 
     def pattern
-      /motivate\s(me|us)?/
+      /(motivate|encourage)\s(me|us)?/
     end
 
     def respond (text, user_name, channel_name, timestamp)
