@@ -32,7 +32,7 @@ $ ruby app.rb -o 0.0.0.0
 
 5. Set your URL to `http://your-address.com:4567`.
 
-6. To ensure that everything was installed correctly, go to a room that slacker is listening to, and type `slacker ping`.  If you get a friendly `pong!` back, everything is working.
+6. To ensure that everything was installed correctly, go to a room that slacker is listening to, and ask slacker: `slacker are you there?`.  If Slacker says 'I am here!', then you have done everything correctly.  Enjoy using Slacker!
 
 ### contributing
 

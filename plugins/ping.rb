@@ -1,11 +1,11 @@
 module Slacker
   class Ping < Plugin
     def pattern
-      /ping/
+      /ping|(are\s(you|u|ya)\sthere)/i
     end
 
     def respond (text, user_name, channel_name, timestamp)
-      'pong!'
+      'I am here!'
     end
 
     Bot.register(Ping)
