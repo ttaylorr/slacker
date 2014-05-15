@@ -14,8 +14,14 @@ module Slacker
       address = pattern.match(text)
       query = text[address.end(0)+1..text.length()]
 
-      image = Google::Search::Image.new(:query => query).first
-      'Here\'s an image of \'' << query << "': " << image.uri
+      images = Google::Search::Image.new(:query => query)
+
+      if images.any?
+        image = images.first
+        'Here\'s an image of \'' << query << "': " << image.uri
+      else
+        'I couldn\'t find an image of ' << query << ' :('
+      end
     end
 
     Bot.register(Images)
