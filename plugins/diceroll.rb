@@ -5,7 +5,7 @@ module Slacker
     end
 
     def pattern
-      /roll\sa\sdice/
+      /roll\s(a|some)\sdice/
     end
 
     def respond (text, user_name, channel_name, timestamp)
