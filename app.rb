@@ -1,6 +1,9 @@
 require 'rubygems'
 require 'sinatra'
 require 'json'
+require 'dotenv'
+
+Dotenv.load
 
 post '/' do
   content_type :json
@@ -51,12 +54,12 @@ module Slacker
         end
 
         if /slacker\s(help|man)/ =~ text and not response.any?
-          response << 'No help available for that command :('
+          response << "Command list\nslacker rabbitmq <environment>\nslacker dj <environment>"
         end
 
         return response
       end
-    end 
+    end
   end
 
   class Plugin
