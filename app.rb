@@ -58,7 +58,7 @@ module Slacker
         if /slacker\s(help|man)/ =~ text and not response.any?
           response << \
           "Command list\n"\
-          "slacker dj <environment> -> shows a 5 min snaphot of \# of jobs"\
+          "slacker dj <environment> -> shows a 5 min snaphot of \# of jobs\n"\
           "slacker dms -> shows all deadmansnitch jobs and their status\n"\
           "slacker rabbitmq <environment> -> message stats for all queues in an environment\n"
         end
