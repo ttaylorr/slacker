@@ -50,18 +50,19 @@ module Slacker
           https.request req
         end
 
-        result = JSON.parse res.body
+        results = JSON.parse res.body
 
         output = "Summary\n"
-        i = 2
-        while i < 6
-          queue_name = result[i]["name"]
-          queue_messages = result[i]["messages"]
-          queue_messages_ready = result[i]["messages_ready"]
-          queue_messages_unacknowledged = result[i]["messages_unacknowledged"]
-          queue_idle_since = result[i]["idle_since"]
-          output << "#{queue_name}, Ready #{queue_messages_ready}, UnAck #{queue_messages_unacknowledged}, Messages #{queue_messages}, Idle Since #{queue_idle_since}\n"
-          i += 1
+
+        results.each_with_index do |i, result|
+          if i > 1
+            queue_name = result["name"]
+            queue_messages = result["messages"]
+            queue_messages_ready = result["messages_ready"]
+            queue_messages_unacknowledged = result["messages_unacknowledged"]
+            queue_idle_since = result["idle_since"]
+            output << "#{queue_name}, Ready #{queue_messages_ready}, UnAck #{queue_messages_unacknowledged}, Messages #{queue_messages}, Idle Since #{queue_idle_since}\n"
+          end
         end
       else
         output = "Put in a correct environment you douche! #{VALID_ENVIRONMENTS}"
