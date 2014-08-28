@@ -17,7 +17,7 @@ module Slacker
 
       req.basic_auth ENV.fetch('DEADMANSNITCH_API')
 
-      http_opts = { use_ssl: false }
+      http_opts = { use_ssl: true }
 
       res = Net::HTTP.start 'api.deadmanssnitch.com', 443, http_opts do |https|
         https.request req
