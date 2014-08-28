@@ -13,7 +13,7 @@ module Slacker
     end
 
     def respond (text, user_name, channel_name, timestamp)
-      action, environment, *_ = text.split(" ")
+      action, slacker, environment, *_ = text.split(" ")
       output = ""
 
       if VALID_ENVIRONMENTS.include?(environment) then
@@ -33,7 +33,7 @@ module Slacker
 
         output = "#{environment} - #{delayed_job_count} at #{time_date}"
       else
-        output = "Put in a correct environment you douche! #{VALID_ENVIRONMENTS}"
+        output = "Put in a correct environment you douche! #{VALID_ENVIRONMENTS} - #{environment}"
       end
 
       output
