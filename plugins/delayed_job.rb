@@ -33,7 +33,15 @@ module Slacker
       delayed_job_count = result["measurements"].first.last.first["value"]
       time_date = Time.at result["measurements"].first.last.first["measure_time"]
 
-      "#{environment} - #{delayed_job_count} at #{time_date}"
+      output = ""
+
+      if VALID_ENVIRONMENTS.include?(environment) then
+        output = "#{environment} - #{delayed_job_count} at #{time_date}"
+      else
+        output = "Put in a correct environment you douche! #{VALID_ENVIRONMENTS}"
+      end
+
+      output
     end
 
     Bot.register(DelayedJob)
