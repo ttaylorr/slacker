@@ -15,7 +15,7 @@ module Slacker
     def respond (text, user_name, channel_name, timestamp)
       action, slacker, environment, *_ = text.split(" ")
 
-      "https://rpm.newrelic.com/public/charts/2MvxMtpUO3v"
+      "vm6\nhttps://rpm.newrelic.com/public/charts/2MvxMtpUO3v\n\nvm01https://rpm.newrelic.com/public/charts/5U4XwNYqx1M"
     end
 
     Bot.register(NewRelic)
