@@ -13,7 +13,9 @@ module Slacker
     end
 
     def respond (text, user_name, channel_name, timestamp)
-      environment = text.split(" ").last || "Production"
+      VALID_ENVIRONMENTS = %w(production dev test staging)
+      environment = text.split(" ").last
+      environment = "production" unless VALID_ENVIRONMENTS.include?(environment)
 
       case environment
       when 'production'
