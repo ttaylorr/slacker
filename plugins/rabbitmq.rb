@@ -63,7 +63,6 @@ module Slacker
           output << "#{queue_name}, Ready #{queue_messages_ready}, UnAck #{queue_messages_unacknowledged}, Messages #{queue_messages}, Idle Since #{queue_idle_since}\n"
           i += 1
         end
-        output = "#{environment} - #{delayed_job_count} at #{time_date}"
       else
         output = "Put in a correct environment you douche! #{VALID_ENVIRONMENTS}"
       end
