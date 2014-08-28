@@ -5,6 +5,8 @@ require 'dotenv'
 
 Dotenv.load
 
+VALID_ENVIRONMENTS = %w(production staging1 staging2 staging3 sandbox)
+
 post '/' do
   content_type :json
 

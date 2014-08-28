@@ -3,9 +3,6 @@ require 'openssl'
 require 'json'
 
 module Slacker
-
-  VALID_ENVIRONMENTS = %w(production dev test staging)
-
   class RabbitMQ < Plugin
     def help
       'Usage: slacker rabbitmq <environment>'

@@ -3,9 +3,6 @@ require 'openssl'
 require 'json'
 
 module Slacker
-
-  VALID_ENVIRONMENTS = %w(production dev test staging)
-
   class DelayedJob < Plugin
     def help
       'Usage: slacker dj'
