@@ -15,7 +15,7 @@ module Slacker
     def respond (text, user_name, channel_name, timestamp)
       req = Net::HTTP::Get.new "/v1/snitches"
 
-      req.basic_auth ENV.fetch('DEADMANSNITCH_API')
+      req.basic_auth ENV.fetch('DEADMANSNITCH_API'),""
 
       http_opts = { use_ssl: true }
 
