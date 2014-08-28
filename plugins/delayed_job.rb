@@ -16,7 +16,7 @@ module Slacker
     end
 
     def respond (text, user_name, channel_name, timestamp)
-      environment = text.split(" ").last
+      action, environment, *_ = text.split(" ")
       environment = "production" unless VALID_ENVIRONMENTS.include?(environment)
 
       req = Net::HTTP::Get.new "/v1/metrics/#{environment}.delayed_job.total?count=1&resolution=1"
