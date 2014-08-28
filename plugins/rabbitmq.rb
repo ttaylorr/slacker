@@ -54,7 +54,7 @@ module Slacker
 
         output = "Summary\n"
 
-        results.each_with_index do |i, result|
+        results.each_with_index do |result,i|
           if i > 1
             queue_name = result["name"]
             queue_messages = result["messages"]
