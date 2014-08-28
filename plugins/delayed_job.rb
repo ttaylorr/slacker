@@ -33,7 +33,7 @@ module Slacker
 
         output = "#{environment} - #{delayed_job_count} at #{time_date}"
       else
-        output = "Put in a correct environment you douche! #{VALID_ENVIRONMENTS} - #{environment}"
+        output = "Put in a correct environment you douche! #{VALID_ENVIRONMENTS}"
       end
 
       output
