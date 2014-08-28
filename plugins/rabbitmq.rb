@@ -3,6 +3,9 @@ require 'openssl'
 require 'json'
 
 module Slacker
+
+  VALID_ENVIRONMENTS = %w(production dev test staging)
+
   class RabbitMQ < Plugin
     def help
       'Usage: slacker rabbitmq <environment>'
@@ -13,7 +16,6 @@ module Slacker
     end
 
     def respond (text, user_name, channel_name, timestamp)
-      VALID_ENVIRONMENTS = %w(production dev test staging)
       environment = text.split(" ").last
       environment = "production" unless VALID_ENVIRONMENTS.include?(environment)
 
