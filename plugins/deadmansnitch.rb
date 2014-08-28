@@ -13,7 +13,7 @@ module Slacker
     end
 
     def respond (text, user_name, channel_name, timestamp)
-      slacker, action, filter, *_ = text.split(" ")
+      #slacker, action, filter, *_ = text.split(" ")
 
       req = Net::HTTP::Get.new "/v1/snitches"
 
@@ -32,8 +32,10 @@ module Slacker
       results.each do |result|
         snitch_name = result["name"]
         snitch_status = result["status"]
-        output << "#{snitch_name} - #{snitch_status} - filter:#{filter},action:#{action},slacker:#{slacker}\n"
+        #output << "#{snitch_name} - #{snitch_status} - filter:#{filter},action:#{action},slacker:#{slacker}\n"
+        output << "#{snitch_name} - #{snitch_status}\n"
       end
+
       output
     end
 
