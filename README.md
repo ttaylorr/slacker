@@ -34,6 +34,18 @@ $ ruby app.rb -o 0.0.0.0
 
 6. To ensure that everything was installed correctly, go to a room that slacker is listening to, and ask slacker: `slacker are you there?`.  If Slacker says 'I am here!', then you have done everything correctly.  Enjoy using Slacker!
 
+### configuration
+
+##### changing slackers name
+
+Copy `.env.sample` to `.env`
+
+Edit `.env` and set a value for SLACKER_NAME_OVERRIDE
+
+eg `SLACKER_NAME_OVERRIDE=holly`
+
+Start your app and refer to slacker as `holly` and you are away!
+
 ### contributing
 
 If you wish to add a new script, write a script in the `plugins/` directory, following the same format as `plugins/ping.rb`.  Slacker will automatically load your plugin, as long as you specify that it should be added to the bots list of plugins by dropping `Bot.register(<classname>)` in your plugin.
