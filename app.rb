@@ -1,6 +1,11 @@
 require 'rubygems'
 require 'sinatra'
 require 'json'
+require 'dotenv'
+
+Dotenv.load
+
+SLACKER_NAME_OVERRIDE = ENV['SLACKER_NAME_OVERRIDE'] || 'slacker'
 
 post '/' do
   content_type :json
@@ -35,8 +40,8 @@ module Slacker
         response = Array.new
 
         @@plugins.each do |plugin|
-          if /slacker\s(help|man)/ =~ text
-            matches = /slacker\s(help|man)\s(.*)/.match(text)
+          if /#{SLACKER_NAME_OVERRIDE}\s(help|man)/ =~ text
+            matches = /#{SLACKER_NAME_OVERRIDE}\s(help|man)\s(.*)/.match(text)
             break if matches.nil?
 
             needs_help_with = matches.captures[1]
@@ -50,13 +55,13 @@ module Slacker
           end
         end
 
-        if /slacker\s(help|man)/ =~ text and not response.any?
+        if /#{SLACKER_NAME_OVERRIDE}\s(help|man)/ =~ text and not response.any?
           response << 'No help available for that command :('
         end
 
         return response
       end
-    end 
+    end
   end
 
   class Plugin
