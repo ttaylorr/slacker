@@ -12,7 +12,7 @@ Slacker is maintained primarily by [ttaylorr](http://ttaylorr.com) and sits on t
 $ git clone https://github.com/ttaylorr/slacker && cd slacker
 ```
 
-2. Once cloned, install all the necessary gems by running `bundle install`.  This step assumes you already have Ruby installed and in your path.
+2. Once cloned, install all the necessary gems by running `bin/bootstrap`.  This step assumes you already have Ruby installed and in your path.
 
 3. Put your Google Translate API key into your environment variables.  Do so by invoking the following:
 
@@ -20,15 +20,11 @@ $ git clone https://github.com/ttaylorr/slacker && cd slacker
 $ export SLACKER_TRANSLATE_API_KEY=<your-key>
 ```
 
-4. Once ready, bootstrap Slacker by invoking:
-
-```bin/boostrap```
-
-5. To start slacker invoke:
+4. To start slacker invoke:
 
 ```bin/start```
 
-**Please note:** Slacker will *not* properly bind to your local address unless you tell it to bind with the `-o` flag.
+You can configure the port that slacker runs on by editing `bin/start` and changing the `-p` value.
 
 4. Now, log into Slack, and select to add a new integration.  Click on the 'Outgoing Web Hooks' integration, and scroll down to Integration Settings.  At this point, you can configure the channels that Slacker will listen to, trigger words, its label, apperance, etc.
 
