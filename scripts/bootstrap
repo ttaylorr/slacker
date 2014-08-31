@@ -1,5 +1,0 @@
-#!/bin/sh
-
-bundle install
-echo "Starting 'slacker', written by: ttaylorr"
-ruby ./app.rb -o 0.0.0.0
