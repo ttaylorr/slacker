@@ -20,11 +20,13 @@ $ git clone https://github.com/ttaylorr/slacker && cd slacker
 $ export SLACKER_TRANSLATE_API_KEY=<your-key>
 ```
 
-4. Once ready, start Slacker by either invoking `script/boostrap` or the following:
+4. Once ready, bootstrap Slacker by invoking:
 
-```
-$ ruby app.rb -o 0.0.0.0
-```
+```bin/boostrap```
+
+5. To start slacker invoke:
+
+```bin/start```
 
 **Please note:** Slacker will *not* properly bind to your local address unless you tell it to bind with the `-o` flag.
 
