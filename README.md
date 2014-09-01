@@ -6,33 +6,47 @@ Slacker is maintained primarily by [ttaylorr](http://ttaylorr.com) and sits on t
 
 ### installation
 
-1. Clone down this repo on the box that you will be running Slacker on.
+Clone down this repo on the box that you will be running Slacker on.
 
 ```
 $ git clone https://github.com/ttaylorr/slacker && cd slacker
 ```
 
-2. Once cloned, install all the necessary gems by running `bundle install`.  This step assumes you already have Ruby installed and in your path.
+Once cloned, install all the necessary gems by running:
 
-3. Put your Google Translate API key into your environment variables.  Do so by invoking the following:
+```
+bin/bootstrap
+```
+
+This step assumes you already have Ruby installed and in your path.
+
+Put your Google Translate API key into your environment variables.  Do so by invoking the following:
 
 ```
 $ export SLACKER_TRANSLATE_API_KEY=<your-key>
 ```
 
-4. Once ready, start Slacker by either invoking `script/boostrap` or the following:
+To start slacker invoke:
 
 ```
-$ ruby app.rb -o 0.0.0.0
+bin/start
 ```
 
-**Please note:** Slacker will *not* properly bind to your local address unless you tell it to bind with the `-o` flag.
+You can configure the port that slacker runs on by editing `bin/start` and changing the `-p` value.
 
 4. Now, log into Slack, and select to add a new integration.  Click on the 'Outgoing Web Hooks' integration, and scroll down to Integration Settings.  At this point, you can configure the channels that Slacker will listen to, trigger words, its label, apperance, etc.
 
 5. Set your URL to `http://your-address.com:4567`.
 
-6. To ensure that everything was installed correctly, go to a room that slacker is listening to, and ask slacker: `slacker are you there?`.  If Slacker says 'I am here!', then you have done everything correctly.  Enjoy using Slacker!
+6. To ensure that everything was installed correctly, go to a room that slacker is listening to, and ask slacker:
+
+```
+slacker are you there?
+```
+
+This assumes you haven't overriden Slackers name if so then use the override name.
+
+If Slacker says `I am here!`, then you have done everything correctly.  Enjoy using Slacker!
 
 ### configuration
 
