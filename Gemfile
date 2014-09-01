@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'sinatra'
-gem 'json'
+gem 'excon'
 gem 'googl'
 gem 'google-search'
+gem 'json'
+gem 'sinatra'
 gem 'to_lang'

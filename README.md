@@ -62,6 +62,10 @@ Start your app and refer to slacker as `holly` and you are away!
 
 If you are writing your own plugins you can gain access to this name (for use in help text) by using `SLACKER_NAME_OVERRIDE`.
 
+### Plugin Libraries
+
+[JSON Responder](using_json_responder.md)
+
 ### contributing
 
 If you wish to add a new script, write a script in the `plugins/` directory, following the same format as `plugins/ping.rb`.  Slacker will automatically load your plugin, as long as you specify that it should be added to the bots list of plugins by dropping `Bot.register(<classname>)` in your plugin.
