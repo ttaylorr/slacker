@@ -8,7 +8,7 @@ This is extremely useful if you want Slacker to ask a service something about it
 
 Here is a simple example:
 
-```
+```ruby
 require_relative 'json_responder'
 
 module Slacker
@@ -38,13 +38,13 @@ end
 
 This will return (from the above URL):
 
-```
+```json
 {"ip"=>"59.167.218.225, 202.177.218.91", "about"=>"/about", "Pro!"=>"http://getjsonip.com"}
 ```
 
 So the process_response method simply returns what ever you want out of the JSON payload back to Slack.
 
-```
+```ruby
 def process_response (result)
   result["ip"]
 end
@@ -53,7 +53,8 @@ end
 #### Authenticated (basic) calls and/or HTTPS
 
 If you wanted to do a more complicated call to an HTTPS URL and have it do some basic authentication you could define the following for your url_for method:
-```
+
+```ruby
 def url_for
   URI::Generic.build(
     scheme: "https",
@@ -69,7 +70,7 @@ end
 
 If your username has some "odd" characters in it (like an @) here is a way to handle that.
 
-```
+```ruby
 def url_for(environment)
   URI::Generic.build(
     scheme: "https",
