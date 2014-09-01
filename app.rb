@@ -1,29 +1,31 @@
 require 'rubygems'
-require 'sinatra'
+require 'sinatra/base'
 require 'json'
 require 'dotenv'
 
 Dotenv.load
 
-SLACKER_NAME_OVERRIDE = ENV['SLACKER_NAME_OVERRIDE'] || 'slacker'
-
-post '/' do
-  content_type :json
-
-  text = params[:text]
-  user_name = params[:user_name]
-  channel_name = params[:channel_name]
-  timestamp = params[:timestamp]
-
-  response = Slacker::Bot.handle(text, user_name, channel_name, timestamp)
-  JSON.generate({text: response.join("\n")}) if response
-end
-
-get '/' do
-  haml :index
-end
-
 module Slacker
+  SLACKER_NAME_OVERRIDE = ENV['SLACKER_NAME_OVERRIDE'] || 'slacker'
+
+  class Application < Sinatra::Application
+    post '/' do
+      content_type :json
+
+      text         = params[:text]
+      user_name    = params[:user_name]
+      channel_name = params[:channel_name]
+      timestamp    = params[:timestamp]
+
+      response = Slacker::Bot.handle(text, user_name, channel_name, timestamp)
+      JSON.generate({text: response.join("\n")}) if response
+    end
+
+    get '/' do
+      haml :index
+    end
+  end
+
   class Bot
     @@plugins = Array.new
 
