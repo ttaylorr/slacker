@@ -66,6 +66,10 @@ If you are writing your own plugins you can gain access to this name (for use in
 
 [JSON Responder](using_json_responder.md)
 
+### Plugin Examples
+
+[AWS list maintenance](aws_list_maintenance.md)
+
 ### contributing
 
 If you wish to add a new script, write a script in the `plugins/` directory, following the same format as `plugins/ping.rb`.  Slacker will automatically load your plugin, as long as you specify that it should be added to the bots list of plugins by dropping `Bot.register(<classname>)` in your plugin.
