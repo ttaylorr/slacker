@@ -50,7 +50,7 @@ If Slacker says `I am here!`, then you have done everything correctly.  Enjoy us
 
 ### configuration
 
-##### changing slackers name
+#### changing slacker's name
 
 Copy `.env.sample` to `.env`
 
