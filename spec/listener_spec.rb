@@ -1,12 +1,9 @@
-require 'rspec'
-require_relative '../lib/robot'
+require_relative 'spec_helper'
 require_relative '../lib/listener'
 
-describe Slacker::Robot do
-  before do
-    @robot = Slacker::Robot.new
-  end
+include Slacker::SpecHelper
 
+describe Slacker::Robot do
   let(:responder_block) { Proc.new { |message| }}
 
   it "responds to matching messages" do
