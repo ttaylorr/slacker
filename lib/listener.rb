@@ -6,12 +6,12 @@ module Slacker
       @regex, @callback = regex, callback
     end
 
-    def hears?(message_data)
-      !self.regex.match(message_data).nil?
+    def hears?(message)
+      !self.regex.match(message.contents).nil?
     end
 
-    def hear!(message_data)
-      self.callback.call(message_data)
+    def hear!(message)
+      self.callback.call(message)
     end
   end
 end

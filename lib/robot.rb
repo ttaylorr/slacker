@@ -1,4 +1,5 @@
 require_relative 'listener'
+require_relative 'message'
 
 module Slacker
   class Robot
@@ -10,12 +11,22 @@ module Slacker
       @listeners << Listener.new(regex, callback)
     end
 
-    def hear(message_data)
+    def hear(raw_message)
+      message = Message.new(raw_message)
+
       @listeners.each do |listener|
-        if listener.hears?(message_data)
-          listener.hear!(message_data)
+        if listener.hears?(message)
+          listener.hear!(message)
         end
       end
+    end
+
+    def attach(adapter)
+      (Thread.new { adapter.run }).join
+    end
+
+    def plug(plugin)
+      plugin.ready(self)
     end
   end
 end
