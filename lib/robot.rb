@@ -19,6 +19,8 @@ module Slacker
           listener.hear!(message)
         end
       end
+
+      message
     end
 
     def attach(adapter)
