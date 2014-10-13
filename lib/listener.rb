@@ -7,11 +7,11 @@ module Slacker
     end
 
     def hears?(message)
-      !self.regex.match(message.contents).nil?
+      self.regex.match(message.contents)
     end
 
-    def hear!(message)
-      self.callback.call(message)
+    def hear!(message, match)
+      self.callback.call(message, match)
     end
   end
 end

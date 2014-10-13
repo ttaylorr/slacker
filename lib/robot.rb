@@ -14,10 +14,12 @@ module Slacker
     def hear(raw_message)
       message = Message.new(raw_message)
 
-      @listeners.select do |listener|
-        listener.hears?(message)
-      end.each do |listener|
-        listener.hear!(message)
+      @listeners.each do |listener|
+        match = listener.hears?(message)
+
+        if match
+          listener.hear!(message, match)
+        end
       end
 
       message
