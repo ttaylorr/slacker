@@ -18,12 +18,13 @@ module Slacker
         })
       end
 
-      def post_message(channel, text)
+      def post_message(channel, text, icon)
         json_parse self.post('chat.postMessage', {
           :token => @token,
           :channel => channel,
           :text => text,
-          :username => @username
+          :username => @username,
+          :icon => icon
         })
       end
     end
