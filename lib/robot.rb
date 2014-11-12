@@ -4,7 +4,7 @@ require_relative 'message'
 module Slacker
   class Robot
     def initialize
-      @listeners = []
+      @listeners, @adapter = [], nil
     end
 
     def respond(regex, &callback)
@@ -16,17 +16,22 @@ module Slacker
 
       @listeners.each do |listener|
         match = listener.hears?(message)
-
         if match
           listener.hear!(message, match)
         end
       end
 
-      message
+      @adapter.send(message)
     end
 
     def attach(adapter)
-      (Thread.new { adapter.run }).join
+      @adapter = adapter
+      
+      begin
+        (Thread.new { adapter.run }).join
+      rescue Exception => e
+        puts e
+      end
     end
 
     def plug(plugin)

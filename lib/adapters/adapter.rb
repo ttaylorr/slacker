@@ -27,7 +27,7 @@ module Slacker
       # message - the message that was heard
       #
       # Returns nothing 
-      def recieve(message)
+      def hear(message)
         @robot.hear(message)
       end
 
