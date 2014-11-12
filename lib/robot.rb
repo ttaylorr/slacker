@@ -21,7 +21,9 @@ module Slacker
         end
       end
 
-      @adapter.send(message)
+      @adapter.send(message) unless @adapter.nil?
+
+      return message
     end
 
     def attach(adapter)

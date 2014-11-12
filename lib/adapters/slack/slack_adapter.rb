@@ -50,7 +50,7 @@ module Slacker
 
       def send(message)
         unless message.response.empty?
-          @api.post_message(@channel, message.response)
+          @api.post_message(@channel, message.pretty_response)
         end
       end
     end

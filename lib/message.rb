@@ -1,6 +1,6 @@
 module Slacker
   class Message
-    attr_reader :contents
+    attr_reader :contents, :response
 
     def initialize(raw)
       @contents, @response = raw, Array.new
@@ -10,7 +10,7 @@ module Slacker
       @response << message
     end
 
-    def response
+    def pretty_response
       @response.join("\n")
     end
 
