@@ -1,8 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'excon'
-gem 'googl'
-gem 'google-search'
+gem 'rake'
+gem 'dotenv'
 gem 'json'
-gem 'sinatra'
-gem 'to_lang'
+
+group :test do
+  gem 'rspec'
+  gem 'timecop'
+end
+
+gem 'timerizer'
+
