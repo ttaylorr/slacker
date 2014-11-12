@@ -2,74 +2,44 @@
 
 <img src="http://i.imgur.com/tMom4oB.png" alt="slacker_icon" width="160" height="160" align="right">
 Slacker is a collection of scripts for making [Slack](https://slack.com) a little better.
-Slacker is maintained primarily by [ttaylorr](http://ttaylorr.com) and sits on the [Overcast Network](https://oc.tc) Slack room.  Slacker helps us out with motivation, mundane tasks, and more!
+Slacker is maintained primarily by [ttaylorr](http://ttaylorr.com) and sits on the [Overcast Network](https://oc.tc) Slack room.
 
 ### installation
 
 Clone down this repo on the box that you will be running Slacker on.
 
 ```
-$ git clone https://github.com/ttaylorr/slacker && cd slacker
+$ git clone git@github.com:ttaylorr/slacker && cd slacker
 ```
 
-Once cloned, install all the necessary gems by running:
+Once cloned, you'll need to do a few things.
 
-```
-bin/bootstrap
-```
-
-This step assumes you already have Ruby installed and in your path.
-
-Put your Google Translate API key into your environment variables.  Do so by invoking the following:
-
-```
-$ export SLACKER_TRANSLATE_API_KEY=<your-key>
-```
+1. Install all necessary gems by running `bundle install`.
+2. Create a `.env` file and fill it out with the necessary tokens and info, as in `.env.example`.  (To make this easy, just `cp .env.example .env` and replace fill out the environment variables.
 
 To start slacker invoke:
 
 ```
-bin/start
+$ ruby bin/slacker.rb
 ```
-
-You can configure the port that slacker runs on by editing `bin/start` and changing the `-p` value.
-
-4. Now, log into Slack, and select to add a new integration.  Click on the 'Outgoing Web Hooks' integration, and scroll down to Integration Settings.  At this point, you can configure the channels that Slacker will listen to, trigger words, its label, apperance, etc.
-
-5. Set your URL to `http://your-address.com:4567`.
-
-6. To ensure that everything was installed correctly, go to a room that slacker is listening to, and ask slacker:
-
-```
-slacker are you there?
-```
-
-This assumes you haven't overriden Slackers name if so then use the override name.
-
-If Slacker says `I am here!`, then you have done everything correctly.  Enjoy using Slacker!
 
 ### configuration
 
-#### changing slacker's name
-
-Copy `.env.sample` to `.env`
-
-Edit `.env` and set a value for SLACKER_NAME_OVERRIDE
-
-eg `SLACKER_NAME_OVERRIDE=holly`
-
-Start your app and refer to slacker as `holly` and you are away!
-
-If you are writing your own plugins you can gain access to this name (for use in help text) by using `SLACKER_NAME_OVERRIDE`.
-
-### Plugin Libraries
-
-[JSON Responder](using_json_responder.md)
+All configuration is contained in the `.env` file in the root of Slacker.
 
 ### contributing
 
-If you wish to add a new script, write a script in the `plugins/` directory, following the same format as `plugins/ping.rb`.  Slacker will automatically load your plugin, as long as you specify that it should be added to the bots list of plugins by dropping `Bot.register(<classname>)` in your plugin.
+If you wish to add a new script, write a plugin in the `lib/plugins` directory (and an accompanying test).  If anything about this is confusing, take a look at the existing patterns, and work from there.
+
+Slacker makes it really easy to respond to messages using Regex.  Simply respond as in the following example:
+
+```ruby
+@slacker.respond /regex/ do |message, match|
+  # the match variables are contained in `match`
+  message.write(repsonse)
+end
+```
 
 ------
 
-With :hearts: from Slacker, enjoy.
+With :heart: from Slacker, enjoy.
