@@ -37,7 +37,7 @@ Slacker makes it really easy to respond to messages using Regex.  Simply respond
 ```ruby
 @slacker.respond /regex/ do |message, match|
   # the match variables are contained in `match`
-  message.write(repsonse)
+  message.write(response)
 end
 ```
 
