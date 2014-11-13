@@ -12,22 +12,22 @@ describe Slacker::Plugins::UtilPlugin do
   end
 
   it "replies 'pong' to messages matching /ping/" do
-    expect(@robot.hear("ping").response).to include("Pong!")
+    expect(@robot.hear("#{bot_name} ping").response).to include("Pong!")
   end
 
   it "does not reply to messages not matching /ping/" do
-    expect(@robot.hear("pong").response).not_to include("Pong!")
+    expect(@robot.hear("#{bot_name} pong").response).not_to include("Pong!")
   end
 
   it "replies to the current time" do
     now_time = Time.now
 
     Timecop.freeze(now_time) do
-      expect(@robot.hear("time").response).to include(now_time)
+      expect(@robot.hear("#{bot_name} time").response).to include(now_time)
     end
 
     Timecop.freeze(3.days.from_now) do
-      expect(@robot.hear("time").response).not_to include(now_time)
+      expect(@robot.hear("#{bot_name} time").response).not_to include(now_time)
     end
   end
 
@@ -35,7 +35,7 @@ describe Slacker::Plugins::UtilPlugin do
     message = "some message"
     other_message = "some other message"
 
-    expect(@robot.hear("echo #{message}").response).to include(message)
-    expect(@robot.hear("echo #{message}").response).not_to include(other_message)
+    expect(@robot.hear("#{bot_name} echo #{message}").response).to include(message)
+    expect(@robot.hear("#{bot_name} echo #{message}").response).not_to include(other_message)
   end
 end

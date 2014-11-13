@@ -3,16 +3,23 @@ require_relative 'message'
 
 module Slacker
   class Robot
-    def initialize
-      @listeners, @adapter = [], nil
+    attr_reader :name
+
+    def initialize(name)
+      @name, @listeners, @adapter = (name || ENV["NAME"]), [], nil
     end
 
     def respond(regex, &callback)
       @listeners << Listener.new(regex, callback)
     end
 
+    def address_pattern
+      /^#{@name}\s*/
+    end
+
     def hear(raw_message)
-      message = Message.new(raw_message)
+      return unless raw_message =~ address_pattern
+      message = Message.new(raw_message.gsub(address_pattern, ""))
 
       @listeners.each do |listener|
         match = listener.hears?(message)

@@ -10,7 +10,7 @@ describe Slacker::Robot do
     @robot.respond(/^message$/, &responder_block)
 
     expect(responder_block).to receive(:call)
-    @robot.hear("message")
+    @robot.hear("slacker message")
   end
 
   it "doesn't dispatch :call to messages that don't match" do
