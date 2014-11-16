@@ -19,6 +19,7 @@ module Slacker
       # Returns a boolean indicating the success of sending
       # the message back to the server
       def send(message)
+        raise NotImplementedError.new
       end
 
       # Public - proxy method to send a message back
@@ -38,6 +39,7 @@ module Slacker
       #
       # Returns nothing
       def run
+        raise NotImplementedError.new
       end
     end
   end
