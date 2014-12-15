@@ -14,7 +14,7 @@ module Slacker
     end
 
     def address_pattern
-      /^#{@name}\s*/
+      /^((#{@name}[:,]?)|\/)\s*/
     end
 
     def hear(raw_message)
