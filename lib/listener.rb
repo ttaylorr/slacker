@@ -7,7 +7,7 @@ module Slacker
     end
 
     def hears?(message)
-      self.regex.match(message.contents)
+      self.regex.match(message.text)
     end
 
     def hear!(message, match)

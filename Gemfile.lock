@@ -3,6 +3,7 @@ GEM
   specs:
     diff-lcs (1.2.5)
     dotenv (1.0.2)
+    eventmachine (1.0.7)
     json (1.8.1)
     rake (10.3.2)
     rspec (3.0.0)
@@ -19,6 +20,14 @@ GEM
     rspec-support (3.0.4)
     timecop (0.7.1)
     timerizer (0.1.4)
+    websocket (1.2.1)
+    websocket-eventmachine-base (1.1.0)
+      eventmachine (~> 1.0)
+      websocket (~> 1.0)
+      websocket-native (~> 1.0)
+    websocket-eventmachine-client (1.1.0)
+      websocket-eventmachine-base (~> 1.0)
+    websocket-native (1.0.0)
 
 PLATFORMS
   ruby
@@ -30,3 +39,4 @@ DEPENDENCIES
   rspec
   timecop
   timerizer
+  websocket-eventmachine-client
