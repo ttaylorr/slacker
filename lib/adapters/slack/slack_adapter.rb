@@ -1,4 +1,6 @@
 require 'dotenv'
+require 'websocket-eventmachine-client'
+require 'json'
 
 require_relative '../adapter'
 require_relative '../../message'
@@ -7,60 +9,79 @@ require_relative 'slack_http_client'
 module Slacker
   module Adapters
     class SlackAdapter < Adapter
+      attr_reader :channels, :users, :username
+
       def initialize(robot)
         super
+        @name, @token =
+          ENV['NAME'], ENV['SLACK_TOKEN']
 
-        @username, @token, @channel =
-          ENV['NAME'], ENV['SLACK_TOKEN'], ENV['SLACK_GROUP']
-
-        @api = SlackHttpClient.new(@token, @username)
+        @api = SlackHttpClient.new(@name, @token)
       end
 
       def run
+        @rtm_meta = @api.start_rtm
+
+        @channels = (@rtm_meta["channels"] + @rtm_meta["groups"] + @rtm_meta["ims"])
+        @users = @rtm_meta["users"]
+
         queue = Queue.new
-        workers = Array.new(16) { Thread.new {
-          w = QueueWorker.new(queue, self) 
-          loop { w.work }
-        }}
+        workers = create_worker_pool(queue, 16)
 
-        last_query_time = Time.now
-
-        # Start querying slack and populate the queue
-        populator = Thread.new {
-          loop do
-            history = @api.group_history(@channel, last_query_time)
-
-            if history.key? "messages"
-              history["messages"].select do |message|
-                message.key? "user"
-              end.each do |message|
-                queue.enq(message)
-              end
-            end
-
-            last_query_time = Time.now
-            sleep(5)
-          end
-        }
+        start_websocket(queue)
 
         # Attach a bunch of workers to the queue and handle incoming messages
         workers.each(&:join)
-        populator.join
       end
 
       def send(message)
-        unless message.response.empty?
-          @api.post_message(@channel, message.pretty_response, ENV['SLACK_ICON'])
+        @socket.send({
+          :type => 'message',
+          :channel => message.channel["id"],
+          :text => message.pretty_response
+        }.to_json)
+      end
+
+      private
+      def create_worker_pool(queue, size=16)
+        Array.new(16) do
+          Thread.new do
+            w = QueueWorker.new(queue, self) 
+            loop { w.work }
+          end
+        end
+      end
+
+      def start_websocket(queue)
+        EM.run do
+          @socket = WebSocket::EventMachine::Client.connect(:uri => @rtm_meta["url"])
+
+          @socket.onclose do
+            
+          end
+
+          @socket.onmessage do |msg, type|
+            packet = JSON.parse(msg)
+            if packet["type"] == "message"
+              queue << packet
+            end
+          end
         end
       end
     end
 
     class QueueWorker < Struct.new(:queue, :adapter)
       def work
-        raw_message = self.queue.pop
+        message = self.queue.pop
 
-        return unless raw_message.key? "user"
-        self.adapter.hear(raw_message["text"])
+        channel = self.adapter.channels.select { |channel| channel["id"] == message["channel"] }.first
+        user    = self.adapter.users.select    { |user| user["id"] == message["user"]}.first
+
+        self.adapter.hear({
+          :text => message["text"],
+          :channel => channel,
+          :user => user
+        })
       end
     end
   end

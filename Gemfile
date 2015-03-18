@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rake'
 gem 'dotenv'
 gem 'json'
+gem 'websocket-eventmachine-client'
 
 group :test do
   gem 'rspec'

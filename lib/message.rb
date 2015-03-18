@@ -1,9 +1,10 @@
 module Slacker
   class Message
-    attr_reader :contents, :response
+    attr_reader :text, :channel, :user, :response
 
-    def initialize(raw)
-      @contents, @response = raw, Array.new
+    def initialize(text, channel, user)
+      @text, @channel, @user, @response =
+        text, channel, user, []
     end
 
     def write(message)

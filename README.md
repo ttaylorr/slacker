@@ -18,6 +18,8 @@ Once cloned, you'll need to do a few things.
 1. Install all necessary gems by running `bundle install`.
 2. Create a `.env` file and fill it out with the necessary tokens and info, as in `.env.example`.  (To make this easy, just `cp .env.example .env` and replace fill out the environment variables.
 
+There is only one thing you have to provide details for in the `.env` file, `SLACK_TOKEN`.  If you're using Slack, you'll want to [create a bot user](https://api.slack.com/bot-users) and copy the token that slack gives you into the `.env` file.
+
 To start slacker invoke:
 
 ```

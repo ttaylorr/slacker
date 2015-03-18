@@ -18,8 +18,12 @@ module Slacker
     end
 
     def hear(raw_message)
-      return unless raw_message =~ address_pattern
-      message = Message.new(raw_message.gsub(address_pattern, ""))
+      text = raw_message[:text]
+
+      return unless text =~ address_pattern
+      message = Message.new(text.gsub(address_pattern, ""),
+                            raw_message[:channel],
+                            raw_message[:user])
 
       @listeners.each do |listener|
         match = listener.hears?(message)
@@ -28,7 +32,7 @@ module Slacker
         end
       end
 
-      @adapter.send(message) unless @adapter.nil?
+      @adapter.send(message) if @adapter
 
       return message
     end
