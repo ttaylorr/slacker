@@ -56,10 +56,6 @@ module Slacker
         EM.run do
           @socket = WebSocket::EventMachine::Client.connect(:uri => @rtm_meta["url"])
 
-          @socket.onclose do
-            
-          end
-
           @socket.onmessage do |msg, type|
             packet = JSON.parse(msg)
             if packet["type"] == "message"
