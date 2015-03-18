@@ -3,7 +3,7 @@
 
 <img src="http://i.imgur.com/tMom4oB.png" alt="slacker_icon" width="160" height="160" align="right">
 Slacker is a collection of scripts for making [Slack](https://slack.com) a little better.
-Slacker is maintained primarily by [ttaylorr](http://ttaylorr.com) and sits on the [Overcast Network](https://oc.tc) Slack room.
+Slacker is maintained primarily by [ttaylorr](http://ttaylorr.com) and sits on the [MCProHosting](https://mcprohosting.com) Slack room.
 
 ### installation
 
