@@ -21,5 +21,13 @@ module Slacker
     def bot_name
       ENV["NAME"] || "slacker"
     end
+
+    def construct_message(message, channel=nil, user=nil)
+      {
+        :text => message,
+        :channel => channel,
+        :user => user
+      }
+    end
   end
 end
