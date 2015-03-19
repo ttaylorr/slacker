@@ -66,7 +66,7 @@ module Slacker
 
           @socket.onmessage do |msg, type|
             packet = JSON.parse(msg)
-            if packet["type"] == "message"
+            if packet["type"] == "message" && packet["text"]
               # Replace Slack's username @ mention with their actual username
               packet["text"].gsub! /<@U(.{8})>/ do |match|
                 matched_user = user_by_id("U#{$1}")
