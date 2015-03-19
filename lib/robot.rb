@@ -32,8 +32,15 @@ module Slacker
     def hear(raw_message)
       text = raw_message[:text]
 
-      puts ["#{Time.now.to_s.blue}", " - ".red, raw_message[:user]["name"].green,
-            " said \"".red, raw_message[:text].green, "\"".red].join
+      log_args = ["#{Time.now.to_s.blue}", " - ".red, raw_message[:user]["name"].green,
+                  " said \"".red, raw_message[:text].green, "\"".red]
+
+      if raw_message[:channel]["name"]
+        log_args << " in ".red
+        log_args << "##{raw_message[:channel]["name"]}".green
+      end
+
+      puts log_args.join
 
       return unless text =~ address_pattern
       message = Message.new(text.gsub(address_pattern, ""),
