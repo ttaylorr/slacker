@@ -23,7 +23,7 @@ module Slacker
         @rtm_meta = @api.start_rtm
 
         @channels = (@rtm_meta["channels"] + @rtm_meta["groups"] + @rtm_meta["ims"])
-        @users = @rtm_meta["users"]
+        @users = (@rtm_meta["users"] + @rtm_meta["bots"])
 
         queue = Queue.new
         workers = create_worker_pool(queue, 16)
@@ -40,6 +40,14 @@ module Slacker
           :channel => message.channel["id"],
           :text => message.pretty_response
         }.to_json)
+      end
+
+      def channel_by_id(channel_id)
+        @channels.select { |channel| channel["id"] == channel_id }.first
+      end
+
+      def user_by_id(user_id)
+        @users.select { |user| user["id"] == user_id }.first
       end
 
       private
@@ -59,6 +67,12 @@ module Slacker
           @socket.onmessage do |msg, type|
             packet = JSON.parse(msg)
             if packet["type"] == "message"
+              # Replace Slack's username @ mention with their actual username
+              packet["text"].gsub! /<@U(.{8})>/ do |match|
+                matched_user = user_by_id("U#{$1}")
+                matched_user["name"] if matched_user
+              end
+
               queue << packet
             end
           end
@@ -70,13 +84,10 @@ module Slacker
       def work
         message = self.queue.pop
 
-        channel = self.adapter.channels.select { |channel| channel["id"] == message["channel"] }.first
-        user    = self.adapter.users.select    { |user| user["id"] == message["user"]}.first
-
         self.adapter.hear({
           :text => message["text"],
-          :channel => channel,
-          :user => user
+          :channel => self.adapter.channel_by_id(message["channel"]),
+          :user => self.adapter.user_by_id(message["user"])
         })
       end
     end
