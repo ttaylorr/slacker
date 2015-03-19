@@ -7,7 +7,7 @@ require_relative '../lib/robot'
 require_relative '../lib/adapters/repl/console_adapter'
 require_relative '../lib/plugins/util_plugin'
 
-r = Slacker::Robot.new(ENV["NAME"])
+r = Slacker::Robot.new
 
 # Attach all the plugins
 r.plug(Slacker::Plugins::UtilPlugin.new)
