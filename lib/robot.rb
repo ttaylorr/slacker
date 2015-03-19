@@ -1,11 +1,22 @@
 require_relative 'listener'
 require_relative 'message'
 
+require 'colorize'
+
 module Slacker
   class Robot
     attr_reader :name
 
     def initialize
+      ["         __           __               ",
+       "   _____/ /___ ______/ /_____  _____   ",
+       "  / ___/ / __ `/ ___/ //_/ _ \\/ ___/  ",
+       " (__  ) / /_/ / /__/ ,< /  __/ /       ",
+       "/____/_/\\__,_/\\___/_/|_|\\___/_/     ",
+       "",                                      ].each do |segment|
+        puts segment.green
+      end
+
       @name, @listeners, @adapter =
         ENV["NAME"], [], nil
     end
@@ -20,6 +31,9 @@ module Slacker
 
     def hear(raw_message)
       text = raw_message[:text]
+
+      puts ["#{Time.now.to_s.blue}", " - ".red, raw_message[:user]["name"].green,
+            " said \"".red, raw_message[:text].green, "\"".red].join
 
       return unless text =~ address_pattern
       message = Message.new(text.gsub(address_pattern, ""),

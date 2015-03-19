@@ -4,6 +4,7 @@ gem 'rake'
 gem 'dotenv'
 gem 'json'
 gem 'websocket-eventmachine-client'
+gem 'colorize'
 
 group :test do
   gem 'rspec'

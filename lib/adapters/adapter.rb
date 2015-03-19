@@ -19,7 +19,8 @@ module Slacker
       # Returns a boolean indicating the success of sending
       # the message back to the server
       def send(message)
-        raise NotImplementedError.new
+        puts ["\t>> ".red, robot.name.green, " responded \"".red,
+              message.pretty_response.green, "\"".red].join
       end
 
       # Public - proxy method to send a message back

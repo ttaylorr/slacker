@@ -35,6 +35,7 @@ module Slacker
       end
 
       def send(message)
+        super
         @socket.send({
           :type => 'message',
           :channel => message.channel["id"],
