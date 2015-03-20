@@ -10,7 +10,12 @@ module Slacker
       def run
         loop do
           print ">> "
-          hear gets.chomp
+
+          hear({
+            :text => gets.chomp,
+            :channel => { name: 'Console' },
+            :user => { name: 'User' }  
+          })
         end
       end
 
