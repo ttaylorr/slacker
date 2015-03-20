@@ -27,7 +27,12 @@ Slacker also exposes a simple conversation API.  Need more info from a user when
   # This listener doens't need the 'slacker' prefix, and will be ignored unless
   # a previous message has been sent matching the outer regex.
   message.expect_reply /(.*)/ do |reply, match|
+    # Do something with the reply that the user has given back...
     reply << "Oh! Your username is #{match[1]}"
+
+    # The neat thing here is that since this block wont actually be triggered until
+    # a reply is received, you can register *nested* replies!  Just repeat the
+    # pattern above ad infinitum, and you can register a whole dialog!
   end
 end
 ```
