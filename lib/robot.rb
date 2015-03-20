@@ -1,11 +1,13 @@
 require_relative 'listener'
 require_relative 'message'
 
+require 'redis'
+require 'redis-namespace'
 require 'colorize'
 
 module Slacker
   class Robot
-    attr_reader :name
+    attr_reader :name, :redis
 
     def initialize
       ["         __           __               ",
@@ -19,6 +21,10 @@ module Slacker
 
       @name, @listeners, @adapter =
         ENV["NAME"], [], nil
+
+      redis_connection = Redis.new(:host => (ENV["REDIS_HOST"] || "127.0.0.1"),
+                                   :port => (ENV["REDIS_PORT"] || 6739))
+      @redis = Redis::Namespace.new(:ns => :slacker, :redis => redis_connection)
     end
 
     def respond(regex, &callback)

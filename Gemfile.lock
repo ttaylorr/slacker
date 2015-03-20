@@ -7,6 +7,9 @@ GEM
     eventmachine (1.0.7)
     json (1.8.1)
     rake (10.3.2)
+    redis (3.1.0)
+    redis-namespace (1.5.1)
+      redis (~> 3.0, >= 3.0.4)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -38,6 +41,8 @@ DEPENDENCIES
   dotenv
   json
   rake
+  redis
+  redis-namespace
   rspec
   timecop
   timerizer
