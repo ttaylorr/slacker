@@ -27,19 +27,30 @@ module Slacker
     end
 
     def hear(raw_message)
-      text = raw_message[:text]
-
-      return unless text =~ address_pattern
-      message = Message.new(text.gsub(address_pattern, ""),
+      original_text = raw_message[:text]
+      message = Message.new(original_text.gsub(address_pattern, ""),
+                            original_text,
                             raw_message[:channel],
                             raw_message[:user])
 
-      @listeners.each do |listener|
+      # Duplicate the @listeners array so we can drop all of the conversational listeners
+      # if they've been satisfied
+      @listeners.dup.each do |listener|
         match = listener.hears?(message)
-        if match
+
+        if match && (listener.conversational ? true : message.original_message =~ address_pattern)
           listener.hear!(message, match)
+
+          # If there is a match and the listener is conversational, we can delete it because
+          # it has been satisfied
+          if listener.conversational
+            @listeners.delete(listener)
+          end
         end
       end
+
+      # Add all of the response listeners to the message
+      @listeners = (@listeners + message.response_listeners)
 
       @adapter.send(message) if @adapter
 
@@ -48,11 +59,11 @@ module Slacker
 
     def attach(adapter)
       @adapter = adapter
-      
+
       begin
         (Thread.new { adapter.run }).join
       rescue Exception => e
-        puts e
+        puts e.message
       end
     end
 

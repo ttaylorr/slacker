@@ -35,7 +35,6 @@ module Slacker
       end
 
       def send(message)
-        super
         @socket.send({
           :type => 'message',
           :channel => message.channel["id"],
@@ -85,11 +84,15 @@ module Slacker
       def work
         message = self.queue.pop
 
-        self.adapter.hear({
-          :text => message["text"],
-          :channel => self.adapter.channel_by_id(message["channel"]),
-          :user => self.adapter.user_by_id(message["user"])
-        })
+        begin
+          self.adapter.hear({
+            :text => message["text"],
+            :channel => self.adapter.channel_by_id(message["channel"]),
+            :user => self.adapter.user_by_id(message["user"])
+          })
+        rescue Exception => e
+          puts e
+        end
       end
     end
   end
