@@ -21,7 +21,7 @@ end
 Slacker also exposes a simple conversation API.  Need more info from a user when responding to a message?  The conversation API is perfect.
 
 ```ruby
-@slacker.respond /conversation test/ do |message, match|
+@slacker.respond /conversation test/ do |message|
   message << 'What is your username on X again?'
 
   # This listener doens't need the 'slacker' prefix, and will be ignored unless
