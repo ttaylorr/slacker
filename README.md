@@ -5,6 +5,34 @@
 Slacker is a collection of scripts for making [Slack](https://slack.com) a little better.
 Slacker is maintained primarily by [ttaylorr](http://ttaylorr.com) and sits on the [MCProHosting](https://mcprohosting.com) Slack room.
 
+### contributing
+
+If you wish to add a new script, write a plugin in the `lib/plugins` directory (and an accompanying test).  If anything about this is confusing, take a look at the existing patterns, and work from there.
+
+Slacker makes it really easy to respond to messages using Regex.  Simply respond as in the following example:
+
+```ruby
+@slacker.respond /regex/ do |message, match|
+  # the match variables are contained in `match`
+  message.write(response)
+end
+```
+
+Slacker also exposes a simple conversation API.  Need more info from a user when responding to a message?  The conversation API is perfect.
+
+```ruby
+@slacker.respond /conversation test/ do |message, match|
+  message << 'What is your username on X again?'
+
+  # This listener doens't need the 'slacker' prefix, and will be ignored unless
+  # a previous message has been sent matching the outer regex.
+  message.expect_reply /(.*)/ do |reply, match|
+    reply << "Oh! Your username is #{match[1]}"
+  end
+end
+```
+
+
 ### installation
 
 Clone down this repo on the box that you will be running Slacker on.
@@ -29,19 +57,6 @@ $ ruby bin/slacker.rb
 ### configuration
 
 All configuration is contained in the `.env` file in the root of Slacker.
-
-### contributing
-
-If you wish to add a new script, write a plugin in the `lib/plugins` directory (and an accompanying test).  If anything about this is confusing, take a look at the existing patterns, and work from there.
-
-Slacker makes it really easy to respond to messages using Regex.  Simply respond as in the following example:
-
-```ruby
-@slacker.respond /regex/ do |message, match|
-  # the match variables are contained in `match`
-  message.write(response)
-end
-```
 
 ------
 
