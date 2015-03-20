@@ -10,15 +10,6 @@ module Slacker
     attr_reader :name, :redis
 
     def initialize(name)
-      ["         __           __               ",
-       "   _____/ /___ ______/ /_____  _____   ",
-       "  / ___/ / __ `/ ___/ //_/ _ \\/ ___/  ",
-       " (__  ) / /_/ / /__/ ,< /  __/ /       ",
-       "/____/_/\\__,_/\\___/_/|_|\\___/_/     ",
-       "",                                      ].each do |segment|
-        puts segment.green
-      end
-
       @name, @listeners, @adapter =
         (name || ENV["NAME"]), [], nil
 
@@ -37,16 +28,6 @@ module Slacker
 
     def hear(raw_message)
       text = raw_message[:text]
-
-      log_args = ["#{Time.now.to_s.blue}", " - ".red, raw_message[:user]["name"].green,
-                  " said \"".red, raw_message[:text].green, "\"".red]
-
-      if raw_message[:channel]["name"]
-        log_args << " in ".red
-        log_args << "##{raw_message[:channel]["name"]}".green
-      end
-
-      puts log_args.join
 
       return unless text =~ address_pattern
       message = Message.new(text.gsub(address_pattern, ""),
