@@ -24,10 +24,10 @@ module Slacker
           handle_username_change(username, message, robot)
         end
 
-        robot.respond /my\sissues/ do |message|
+        robot.respond /(?:show me)?(?:my issues\s?)(?:on JIRA\s)?(?:(?:on|in|affecting)\s(.*))?/i do |message, match|
           jira_opts = {
             :username => get_jira_username(robot, message.user),
-            :project => ENV["JIRA_DEFAULT_PROJECT"]
+            :project => match[1] || ENV["JIRA_DEFAULT_PROJECT"]
           }
 
           if jira_opts[:username].nil?
