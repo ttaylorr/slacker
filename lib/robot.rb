@@ -23,7 +23,7 @@ module Slacker
     end
 
     def address_pattern
-      /^@?(#{@name})[:-;\s]?/
+      /^@?(#{@name})[:-;\s]?/i
     end
 
     def hear(raw_message)
