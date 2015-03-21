@@ -78,7 +78,7 @@ module Slacker
       end
 
       def make_jira_key(user)
-        "jira:username:#{user["id"]}"
+        "jira:#{user["id"]}:username"
       end
     end
   end
