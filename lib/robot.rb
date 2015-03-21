@@ -7,7 +7,7 @@ require 'colorize'
 
 module Slacker
   class Robot
-    attr_reader :name, :redis
+    attr_reader :name, :redis, :adapter
 
     def initialize(name)
       @name, @listeners, @adapter =
@@ -55,6 +55,13 @@ module Slacker
       @adapter.send(message) if @adapter
 
       return message
+    end
+
+    def send_message(reply, channel)
+      message = Message.new(nil, nil, channel, nil)
+      message << reply
+
+      @adapter.send(message)
     end
 
     def attach(adapter)

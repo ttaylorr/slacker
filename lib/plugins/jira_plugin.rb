@@ -38,10 +38,10 @@ module Slacker
 
               jira_opts[:username] = match
 
-              write_jira_issues_to(reply, jira_opts)
+              write_jira_issues_to(reply, jira_opts, robot)
             end
           else
-            write_jira_issues_to(message, jira_opts)
+            write_jira_issues_to(message, jira_opts, robot)
           end
         end
       end
@@ -57,11 +57,13 @@ module Slacker
         end
       end
 
-      def write_jira_issues_to(message, opts)
+      def write_jira_issues_to(message, opts, robot)
         issues_query = "PROJECT=\"#{opts[:project]}\" AND assignee in (#{opts[:username]}) AND status=Open"
         response = @jira.search(issues_query)
 
-        message << "Looks like you have #{response.issues.length} issues assigned to you on #{opts[:project]}:"
+        robot.send_message("Okay, looking for JIRA issues assigned to you on #{opts[:project]}...", message.channel)
+
+        message << "I found #{response.issues.length} issues assigned to you on #{opts[:project]}:"
         response.issues.each do |issue|
           issue_url = "#{ENV["JIRA_URL"]}/browse/#{issue.jira_key}"
           message << "*#{issue.jira_key}* - #{issue.summary} (#{issue_url})"
