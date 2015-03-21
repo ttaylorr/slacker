@@ -1,4 +1,4 @@
-require_relative '../plugin'
+require_relative 'plugin'
 
 require 'dotenv'
 require 'jiralicious'
