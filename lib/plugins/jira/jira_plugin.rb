@@ -61,9 +61,10 @@ module Slacker
         issues_query = "PROJECT=\"#{opts[:project]}\" AND assignee in (#{opts[:username]}) AND status=Open"
         response = @jira.search(issues_query)
 
-        message << "Looks like you have #{response.issues.length} issues assigned to you:"
+        message << "Looks like you have #{response.issues.length} issues assigned to you on #{opts[:project]}:"
         response.issues.each do |issue|
-          message << "*#{issue.jira_key}* - #{issue.summary}"
+          issue_url = "#{ENV["JIRA_URL"]}/browse/#{issue.jira_key}"
+          message << "*#{issue.jira_key}* - #{issue.summary} (#{issue_url})"
         end
       end
 
