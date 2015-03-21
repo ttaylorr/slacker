@@ -7,6 +7,7 @@ gem 'redis-namespace'
 gem 'json'
 gem 'websocket-eventmachine-client'
 gem 'colorize'
+gem 'jiralicious'
 
 group :test do
   gem 'rspec'
