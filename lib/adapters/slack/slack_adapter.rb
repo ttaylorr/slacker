@@ -46,6 +46,10 @@ module Slacker
         @channels.select { |channel| channel["id"] == channel_id }.first
       end
 
+      def user_by_name(username)
+        @users.select { |user| user["name"] == username }.first
+      end
+
       def user_by_id(user_id)
         @users.select { |user| user["id"] == user_id }.first
       end

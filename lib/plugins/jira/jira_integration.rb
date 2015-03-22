@@ -3,6 +3,7 @@ require_relative './jira_datastore'
 
 # Require all of the plugins associated with JIRA
 require_relative './plugins/browse_issues_plugin.rb'
+require_relative './plugins/issue_assignment_plugin.rb'
 
 module Slacker
   module Plugins
@@ -13,6 +14,7 @@ module Slacker
 
         # Plug them all in!
         robot.plug(BrowseIssuesPlugin.new(datastore))
+        robot.plug(IssueAssignementPlugin.new(datastore))
       end
 
       def configure_jiralicious
