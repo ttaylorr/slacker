@@ -8,6 +8,7 @@ gem 'json'
 gem 'websocket-eventmachine-client'
 gem 'colorize'
 gem 'jiralicious'
+gem 'terminal-table'
 
 group :test do
   gem 'rspec'
