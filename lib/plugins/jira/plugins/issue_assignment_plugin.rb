@@ -12,7 +12,7 @@ module Slacker
       end
 
       def ready(robot)
-        robot.respond /assign (\w{3,4}-\d*) to @?([.^\w]*)/ do |message, match|
+        robot.respond /assign (\w{3,4}-\d*) to @?([0-9a-zA-Z-_^\w]*)/i do |message, match|
           issue_key = match.captures[0]
           assignee = resolve_assignee(match.captures[1], message, robot)
 
