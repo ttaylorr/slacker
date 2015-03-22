@@ -19,7 +19,7 @@ module Slacker
 
         robot.respond /(?:show me)?(?:my issues\s?)(?:on JIRA\s)?(?:(?:on|in|affecting)\s(.*))?/i do |message, match|
           jira_opts = {
-            :username => @usernames.get_jira_username(robot, message.user),
+            :username => @usernames.get_jira_username(message.user),
             :project => match[1] || ENV["JIRA_DEFAULT_PROJECT"]
           }
 
