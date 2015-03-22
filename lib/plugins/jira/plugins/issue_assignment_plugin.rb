@@ -12,7 +12,7 @@ module Slacker
       end
 
       def ready(robot)
-        robot.respond /assign (\w{3,4}-\d*) to @?([0-9a-zA-Z-_^\w]*)/i do |message, match|
+        robot.respond /assign (\w{3,4}-\d*) to @?(.*)/i do |message, match|
           issue_key = match.captures[0]
           assignee = resolve_assignee(match.captures[1], message, robot)
 
@@ -21,7 +21,7 @@ module Slacker
           else
             jira_assignee = @usernames.get_jira_username(assignee)
             if jira_assignee.nil?
-              message << "Oh-noes! I don't know who @#{assignee} is on JIRA :disappointed:"
+              message << "Oh-noes! I don't know who @#{assignee["name"]} is on JIRA :disappointed:"
             else
               begin
                 issue = @jira::Issue.find(issue_key)

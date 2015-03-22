@@ -12,7 +12,7 @@ module Slacker
       end
 
       def ready(robot)
-        robot.respond /(?:(?:info me|(?:show info|tell me) about|what is)\s)?(\w{3,4}-\d*)/i do |message, match|
+        robot.respond /(?:info me|(?:show info|tell me) about|what is)\s?(\w{3,4}-\d*)/i do |message, match|
           issue_key = match[1].upcase
           begin
             robot.send_message("Looking for info about #{issue_key}...", message.channel)
