@@ -27,7 +27,7 @@ module Slacker
                 issue = @jira::Issue.find(issue_key)
                 issue.set_assignee(jira_assignee)
 
-                assigned_to = assignee["id"] == message.user["id"] ? "<@#{assignee["name"]}>" : "you."
+                assigned_to = assignee["id"] == message.user["id"] ? "you." : "<@#{assignee["name"]}>"
                 issue_url = "#{ENV["JIRA_URL"]}/browse/#{issue_key}"
 
                 message << "Boom! I assigned #{issue_key} to #{assigned_to} (#{issue_url})"
