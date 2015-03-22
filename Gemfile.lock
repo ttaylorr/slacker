@@ -38,6 +38,7 @@ GEM
     rspec-mocks (3.0.4)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.4)
+    terminal-table (1.4.5)
     timecop (0.7.1)
     timerizer (0.1.4)
     websocket (1.2.1)
@@ -61,6 +62,7 @@ DEPENDENCIES
   redis
   redis-namespace
   rspec
+  terminal-table
   timecop
   timerizer
   websocket-eventmachine-client

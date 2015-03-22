@@ -2,6 +2,8 @@ require_relative '../../plugin'
 
 require 'dotenv'
 require 'jiralicious'
+require 'terminal-table'
+require 'active_support/all'
 
 module Slacker
   module Plugins
@@ -19,7 +21,7 @@ module Slacker
 
         robot.respond /(?:show me)?(?:my issues\s?)(?:on JIRA\s)?(?:(?:on|in|affecting)\s(.*))?/i do |message, match|
           jira_opts = {
-            :username => @usernames.get_jira_username(robot, message.user),
+            :username => @usernames.get_jira_username(message.user),
             :project => match[1] || ENV["JIRA_DEFAULT_PROJECT"]
           }
 
@@ -41,16 +43,23 @@ module Slacker
 
       private
       def write_jira_issues_to(message, opts, robot)
+        robot.send_message("Okay, looking for JIRA issues assigned to you on #{opts[:project]}...", message.channel)
+
         issues_query = "PROJECT=\"#{opts[:project]}\" AND assignee in (#{opts[:username]}) AND status=Open"
         response = @jira.search(issues_query)
 
-        robot.send_message("Okay, looking for JIRA issues assigned to you on #{opts[:project]}...", message.channel)
-
         message << "I found #{response.issues.length} issues assigned to you on #{opts[:project]}:"
-        response.issues.each do |issue|
-          issue_url = "#{ENV["JIRA_URL"]}/browse/#{issue.jira_key}"
-          message << "*#{issue.jira_key}* - #{issue.summary} (#{issue_url})"
+
+        rows = response.issues.map do |issue|
+          [issue.jira_key,
+           issue.summary.truncate(69),
+           "#{ENV["JIRA_URL"]}/browse/#{issue.jira_key}"]
         end
+
+        headers = ['ID', 'Summary', 'URL']
+        table = Terminal::Table.new(:headings => headers, :rows => rows)
+
+        message << "```#{table}```"
       end
     end
   end
