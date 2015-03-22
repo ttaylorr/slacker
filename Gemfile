@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rake'
+gem 'active_support'
 gem 'dotenv'
 gem 'redis'
 gem 'redis-namespace'
