@@ -1,10 +1,15 @@
 require 'net/http'
 require 'json'
+require 'uri'
 
 class GraphiteAPI
   def initialize(host, port)
-    @uri = URI.parse("https://#{host}:#{port}")
+    @uri = URI.parse("http://#{host}:#{port}")
     @graphite = Net::HTTP.new(@uri.host, @uri.port)
+  end
+
+  def graph_url_for(id)
+    "#{@uri.to_s}/render?target=#{id}.png"
   end
 
   def expand(query)

@@ -6,18 +6,17 @@ require_relative '../../imgur/imgur'
 
 module Slacker
   class GraphViewPlugin
-    def initialize
-      @api_host = ENV["GRAPHITE_API_HOST"]
-      @api_port = ENV["GRAPHITE_API_PORT"]
-
+    def initialize(graphite_api)
+      @graphite_api = graphite_api
       @imgur = ENV["IMGUR_CLIENT_ID"] ? Imgur.new(ENV["IMGUR_CLIENT_ID"]) : nil
     end
 
     def ready(robot)
-      robot.respond /graph me (.*)/ do |message, match|
-        graphite_url = graph_image_url(match[1])
+      robot.respond /(?:(?:graph me)|(?:(?:show|get|fetch) me a graph of)) (.*)/ do |message, match|
+        graph_id = match[1]
+        graphite_url = @graphite_api.graph_url_for graph_id
 
-        message << "Okay, graphed that for you :chart_with_upwards_trend:"
+        message << "Okay, here's a graph of `#{graph_id}` for you! :chart_with_upwards_trend:"
 
         if @imgur.nil?
           # If we're not re-hosting images, just send the link directly
@@ -41,10 +40,6 @@ module Slacker
     end
 
     private
-    def graph_image_url(target)
-      "http://#{@api_host}:#{@api_port}/render?target=#{target}.png"
-    end
-
     def delete_after(delete_hash, wait_time)
       Thread.new do
         sleep wait_time
