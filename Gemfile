@@ -8,6 +8,7 @@ gem 'redis-namespace'
 gem 'json'
 gem 'websocket-eventmachine-client'
 gem 'colorize'
+gem 'octokit'
 gem 'jiralicious'
 gem 'terminal-table'
 

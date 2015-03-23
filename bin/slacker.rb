@@ -10,6 +10,7 @@ require_relative '../lib/plugins/util_plugin'
 require_relative '../lib/plugins/jira/jira_integration'
 require_relative '../lib/plugins/coin_flip_plugin'
 require_relative '../lib/plugins/graphite/graphite_ensemble'
+require_relative '../lib/plugins/github/github_ensemble'
 
 ["         __           __               ",
  "   _____/ /___ ______/ /_____  _____   ",
@@ -27,6 +28,7 @@ r.plug(Slacker::Plugins::UtilPlugin.new)
 r.plug(Slacker::Plugins::JiraIntegration.new)
 r.plug(Slacker::Plugins::CoinFlipPlugin.new)
 r.plug(Slacker::Plugins::GraphiteEnsemble.new)
+r.plug(Slacker::Plugins::GitHubEnsemble.new)
 
 # Plug in the adapter and run
 r.attach(Slacker::Adapters::SlackAdapter.new(r))
