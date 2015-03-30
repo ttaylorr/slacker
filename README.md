@@ -1,4 +1,4 @@
-# slacker 2
+# slacker 2.1
 [![Build Status](https://travis-ci.org/ttaylorr/slacker.svg?branch=improvements)](https://travis-ci.org/ttaylorr/slacker)
 
 <img src="http://i.imgur.com/tMom4oB.png" alt="slacker_icon" width="160" height="160" align="right">
