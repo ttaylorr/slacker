@@ -8,7 +8,7 @@ module Slacker
           message.write("Pong!")
         end
 
-        robot.respond /time/ do |message|
+        robot.respond /^time$/ do |message|
           message.write(Time.now)
         end
 
