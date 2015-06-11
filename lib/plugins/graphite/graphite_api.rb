@@ -9,7 +9,7 @@ class GraphiteAPI
   end
 
   def graph_url_for(id)
-    "#{@uri.to_s}/render?target=#{id}.png"
+    "#{@uri.to_s}/render?target=#{id}.png&hideLegend=false"
   end
 
   def expand(query)
