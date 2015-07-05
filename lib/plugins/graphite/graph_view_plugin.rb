@@ -3,8 +3,6 @@ require 'json'
 require "open-uri"
 require "s3"
 
-require_relative '../../imgur/imgur'
-
 module Slacker
   class GraphViewPlugin
     def initialize(graphite_api)
@@ -33,16 +31,16 @@ module Slacker
           object.content = open(graphite_url).read
           object.save
 
-          message << "https://s3.amazonaws.com/#{ENV['S3_BUCKET_NANE']}/#{img_name}"
+          message << "https://s3.amazonaws.com/#{ENV['S3_BUCKET_NAME']}/#{img_name}"
         end
       end
     end
 
     private
     def storage_bucket
-      @s3 ||= S3::Service.new(:access_key_id => ENV['S3_ACCESS_KEY_ID']
-                            :secret_access_key => ENV['S3_SECRET_KEY'])
-      @s3.buckets.find(ENV['S3_BUCKET_NAME'] unless @s3.nil?
+      @s3 ||= S3::Service.new(:access_key_id => ENV['S3_ACCESS_KEY_ID'],
+                              :secret_access_key => ENV['S3_SECRET_KEY'])
+      @s3.buckets.find(ENV['S3_BUCKET_NAME']) unless @s3.nil?
     end
 
     def graph_object_name

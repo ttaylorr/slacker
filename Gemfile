@@ -11,6 +11,8 @@ gem 'colorize'
 gem 'octokit'
 gem 'jiralicious'
 gem 'terminal-table'
+gem 'image_suckr'
+gem 's3'
 
 group :test do
   gem 'rspec'
