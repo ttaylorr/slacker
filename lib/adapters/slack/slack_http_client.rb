@@ -11,9 +11,11 @@ module Slacker
       end
 
       def start_rtm
-        json_parse self.get('rtm.start', {
+        response = json_parse self.get('rtm.start', {
           :token => @token
         })
+        raise "Invalid Slack authentication" if response["error"] == "invalid_auth"
+        response
       end
     end
   end
