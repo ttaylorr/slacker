@@ -14,7 +14,7 @@ module Slacker
         (name || ENV["NAME"]), [], nil
 
       redis_connection = Redis.new(:host => (ENV["REDIS_HOST"] || "127.0.0.1"),
-                                   :db   => (ENV["REDIS_DB"]   || 15),
+                                   :db   => (ENV["REDIS_DB"]   || 0),
                                    :port => (ENV["REDIS_PORT"] || 6739))
       @redis = Redis::Namespace.new(:ns => :slacker, :redis => redis_connection)
     end
